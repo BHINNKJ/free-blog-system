@@ -2,16 +2,15 @@
 
 import { useState, useMemo } from 'react'
 import { Search, X } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { BlogPost } from '@/lib/types/blog'
+import { BlogPost } from '../types'
 
 interface BlogSearchProps {
   posts: BlogPost[]
   onSearch: (filteredPosts: BlogPost[]) => void
+  showTags?: boolean
 }
 
-export default function BlogSearch({ posts, onSearch }: BlogSearchProps) {
+export default function BlogSearch({ posts, onSearch, showTags = true }: BlogSearchProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedTags, setSelectedTags] = useState<string[]>([])
 
@@ -41,11 +40,6 @@ export default function BlogSearch({ posts, onSearch }: BlogSearchProps) {
     })
   }, [posts, searchTerm, selectedTags])
 
-  // 处理搜索
-  const handleSearch = () => {
-    onSearch(filteredPosts)
-  }
-
   // 处理标签选择
   const toggleTag = (tag: string) => {
     setSelectedTags(prev => 
@@ -72,43 +66,43 @@ export default function BlogSearch({ posts, onSearch }: BlogSearchProps) {
       {/* 搜索框 */}
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-        <Input
+        <input
           type="text"
           placeholder="Search articles..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="pl-10 pr-4"
+          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
         />
       </div>
 
       {/* 标签筛选 */}
-      {allTags.length > 0 && (
+      {showTags && allTags.length > 0 && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-gray-700">Filter by tags:</span>
             {selectedTags.length > 0 && (
-              <Button
-                variant="ghost"
-                size="sm"
+              <button
                 onClick={clearFilters}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 hover:text-gray-700 text-sm flex items-center"
               >
                 <X className="h-4 w-4 mr-1" />
                 Clear
-              </Button>
+              </button>
             )}
           </div>
           <div className="flex flex-wrap gap-2">
             {allTags.map(tag => (
-              <Button
+              <button
                 key={tag}
-                variant={selectedTags.includes(tag) ? "default" : "outline"}
-                size="sm"
                 onClick={() => toggleTag(tag)}
-                className="text-xs"
+                className={`px-3 py-1 text-xs rounded-full border transition-colors ${
+                  selectedTags.includes(tag)
+                    ? 'bg-green-600 text-white border-green-600'
+                    : 'bg-white text-gray-700 border-gray-300 hover:border-green-500'
+                }`}
               >
                 {tag}
-              </Button>
+              </button>
             ))}
           </div>
         </div>
@@ -125,4 +119,4 @@ export default function BlogSearch({ posts, onSearch }: BlogSearchProps) {
       </div>
     </div>
   )
-} 
+}

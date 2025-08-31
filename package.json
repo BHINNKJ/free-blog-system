@@ -1,7 +1,7 @@
 {
-  "name": "easyglobe-blog-system",
+  "name": "free-blog-system",
   "version": "1.0.0",
-  "description": "A complete, reusable blog system built with Next.js, React, TypeScript, and Supabase",
+  "description": "A complete, free, and open-source blog system that you can deploy in 5 minutes using Vercel and Supabase",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -24,21 +24,23 @@
     "react",
     "typescript",
     "supabase",
+    "vercel",
     "cms",
     "content-management",
     "blog-system",
-    "reusable-components"
+    "free",
+    "open-source"
   ],
-  "author": "EasyGlobe Team",
+  "author": "BHINNKJ",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/BHINNKJ/easyglobe-blog-system"
+    "url": "https://github.com/BHINNKJ/free-blog-system"
   },
   "bugs": {
-    "url": "https://github.com/BHINNKJ/easyglobe-blog-system/issues"
+    "url": "https://github.com/BHINNKJ/free-blog-system/issues"
   },
-  "homepage": "https://github.com/BHINNKJ/easyglobe-blog-system#readme",
+  "homepage": "https://github.com/BHINNKJ/free-blog-system#readme",
   "peerDependencies": {
     "next": ">=13.0.0",
     "react": ">=18.0.0",

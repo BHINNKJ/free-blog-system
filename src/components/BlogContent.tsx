@@ -4,9 +4,10 @@ import React from 'react'
 
 interface BlogContentProps {
   content: string
+  className?: string
 }
 
-export default function BlogContent({ content }: BlogContentProps) {
+export default function BlogContent({ content, className = '' }: BlogContentProps) {
   // 检查内容是否已经是HTML格式
   const isHTML = content.includes('<') && content.includes('>')
   
@@ -44,10 +45,12 @@ export default function BlogContent({ content }: BlogContentProps) {
       .replace(/\n/g, '<br />')
   }
 
+  const defaultClassName = "prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:text-gray-900 prose-pre:bg-gray-100"
+
   return (
     <div 
-      className="prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-code:text-foreground prose-pre:bg-muted"
+      className={`${defaultClassName} ${className}`}
       dangerouslySetInnerHTML={{ __html: processedContent }}
     />
   )
-} 
+}

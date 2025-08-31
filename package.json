@@ -1,0 +1,58 @@
+{
+  "name": "easyglobe-blog-system",
+  "version": "1.0.0",
+  "description": "A complete, reusable blog system built with Next.js, React, TypeScript, and Supabase",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "templates",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && cp -r templates dist/ && cp -r docs dist/",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "blog",
+    "nextjs",
+    "react",
+    "typescript",
+    "supabase",
+    "cms",
+    "content-management",
+    "blog-system",
+    "reusable-components"
+  ],
+  "author": "EasyGlobe Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BHINNKJ/easyglobe-blog-system"
+  },
+  "bugs": {
+    "url": "https://github.com/BHINNKJ/easyglobe-blog-system/issues"
+  },
+  "homepage": "https://github.com/BHINNKJ/easyglobe-blog-system#readme",
+  "peerDependencies": {
+    "next": ">=13.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "@supabase/supabase-js": ">=2.0.0",
+    "lucide-react": ">=0.200.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

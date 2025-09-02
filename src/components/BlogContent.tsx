@@ -13,6 +13,31 @@ export default function BlogContent({ content, className = '' }: BlogContentProp
   
   let processedContent = content
   
+  // 如果是HTML内容，先修复图片编码问题
+  if (isHTML) {
+    processedContent = processedContent
+      // 修复错误嵌套的img标签
+      .replace(/&lt;img src="&lt;img src="/g, '<img src="')
+      .replace(/&lt;img src="/g, '<img src="')
+      .replace(/&gt;/g, '>')
+      // 修复被空格分隔的URL - 处理 https:="" res.cloudinary.com="" ... 格式
+      .replace(/https:=""([^"]*?)""([^"]*?)=""([^"]*?)=""([^"]*?)=""([^"]*?)"/g, 'https://$1/$2/$3/$4/$5')
+      .replace(/https:=""([^"]*?)""([^"]*?)=""([^"]*?)=""([^"]*?)"/g, 'https://$1/$2/$3/$4')
+      .replace(/https:=""([^"]*?)""([^"]*?)=""([^"]*?)"/g, 'https://$1/$2/$3')
+      .replace(/https:=""([^"]*?)""([^"]*?)"/g, 'https://$1/$2')
+      .replace(/https:=""([^"]*?)"/g, 'https://$1')
+      // 修复其他被分隔的属性
+      .replace(/=" ([^=]+)=" /g, '="$1" ')
+      // 清理多余的空属性
+      .replace(/=""/g, '')
+      // 修复被分割的class属性
+      .replace(/class="([^"]*?)"([^"]*?)"/g, 'class="$1$2"')
+      // 修复被分割的alt属性
+      .replace(/alt="([^"]*?)"([^"]*?)"/g, 'alt="$1$2"')
+      // 修复被分割的loading属性
+      .replace(/loading="([^"]*?)"([^"]*?)"/g, 'loading="$1$2"')
+  }
+  
   if (!isHTML) {
     // 如果是纯文本，进行Markdown渲染
     processedContent = content
